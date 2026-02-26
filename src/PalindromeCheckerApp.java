@@ -1,3 +1,4 @@
+import java.util.Stack;
 import java.util.Scanner;
 public class PalindromeCheckerApp {  public static void main(String[] args) {
 
@@ -5,7 +6,7 @@ public class PalindromeCheckerApp {  public static void main(String[] args) {
     System.out.println("======================================");
     System.out.println("        Palindrome Checker App        ");
     System.out.println("======================================");
-    System.out.println("UC4: Character Array Based Palindrome Check");
+    System.out.println("UC5: Stack-Based Palindrome Checker");
     System.out.println();
 
     // Accept user input
@@ -13,21 +14,22 @@ public class PalindromeCheckerApp {  public static void main(String[] args) {
     System.out.print("Enter a word to check: ");
     String input = scanner.nextLine();
 
-    // Convert String to char array
-    char[] characters = input.toCharArray();
+    // Create stack
+    Stack<Character> stack = new Stack<>();
 
-    // Two-pointer technique
-    int start = 0;
-    int end = characters.length - 1;
+    // Push characters into stack
+    for (int i = 0; i < input.length(); i++) {
+        stack.push(input.charAt(i));
+    }
+
+    // Pop characters and compare
     boolean isPalindrome = true;
-
-    while (start < end) {
-        if (characters[start] != characters[end]) {
+    for (int i = 0; i < input.length(); i++) {
+        char poppedChar = stack.pop();
+        if (input.charAt(i) != poppedChar) {
             isPalindrome = false;
             break;
         }
-        start++;
-        end--;
     }
 
     // Display result
