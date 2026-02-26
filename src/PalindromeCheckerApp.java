@@ -1,12 +1,14 @@
-import java.util.Stack;
 import java.util.Scanner;
-public class PalindromeCheckerApp {  public static void main(String[] args) {
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
+public class PalindromeCheckerApp {   public static void main(String[] args) {
 
     // Application Header
-    System.out.println("======================================");
-    System.out.println("        Palindrome Checker App        ");
-    System.out.println("======================================");
-    System.out.println("UC5: Stack-Based Palindrome Checker");
+    System.out.println("==============================================");
+    System.out.println("        Palindrome Checker App               ");
+    System.out.println("==============================================");
+    System.out.println("UC6: Queue + Stack Based Palindrome Check");
     System.out.println();
 
     // Accept user input
@@ -14,19 +16,22 @@ public class PalindromeCheckerApp {  public static void main(String[] args) {
     System.out.print("Enter a word to check: ");
     String input = scanner.nextLine();
 
-    // Create stack
+    // Create Stack (LIFO) and Queue (FIFO)
     Stack<Character> stack = new Stack<>();
+    Queue<Character> queue = new LinkedList<>();
 
-    // Push characters into stack
+    // Enqueue and Push characters
     for (int i = 0; i < input.length(); i++) {
-        stack.push(input.charAt(i));
+        char ch = input.charAt(i);
+        stack.push(ch);     // LIFO
+        queue.add(ch);      // FIFO
     }
 
-    // Pop characters and compare
+    // Compare dequeue (queue) and pop (stack)
     boolean isPalindrome = true;
-    for (int i = 0; i < input.length(); i++) {
-        char poppedChar = stack.pop();
-        if (input.charAt(i) != poppedChar) {
+
+    while (!stack.isEmpty()) {
+        if (stack.pop() != queue.remove()) {
             isPalindrome = false;
             break;
         }
